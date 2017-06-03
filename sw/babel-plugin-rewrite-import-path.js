@@ -13,18 +13,21 @@ module.exports = function rewriteModulePath({ types }) {
     visitor: {
       ImportDeclaration(nodePath) {
         const importTarget = nodePath.node.source.value
+        const importTargetWithExt =
+          importTarget + (importTarget.indexOf('.js') > -1 ? '' : '.js')
         const isRelative = importTarget[0] === '.'
         if (isRelative) {
           const relToDir = path.relative('./' + this._base, this._dirname)
           nodePath.node.source.value = path.join(
             this._base,
             relToDir,
-            importTarget + (importTarget.indexOf('.js') > -1 ? '' : '.js')
+            importTargetWithExt
           )
         } else {
           nodePath.node.source.value = path.join(
             this._base,
-            this.opts.alias[importTarget]
+            'modules',
+            importTargetWithExt
           )
         }
       }

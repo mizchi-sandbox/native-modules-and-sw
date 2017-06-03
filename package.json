@@ -3,38 +3,34 @@
   "version": "0.0.0",
   "description": "ES Modules test env",
   "scripts": {
-    "install:app:deps": "cd app; yarn install",
-    "create:server:certificate": "cd conf; openssl genrsa -out webapp2-server.key 2048 && openssl req -new -key webapp2-server.key -out webapp2-server.csr -subj \"/C=JP/ST=Tokyo/L=Tokyo/CN=localhost\" && openssl x509 -in webapp2-server.csr -days 3650 -req -signkey webapp2-server.key > webapp2-server.crt",
+    "create:certificate": "cd conf; openssl genrsa -out webapp2-server.key 2048 && openssl req -new -key webapp2-server.key -out webapp2-server.csr -subj \"/C=JP/ST=Tokyo/L=Tokyo/CN=localhost\" && openssl x509 -in webapp2-server.csr -days 3650 -req -signkey webapp2-server.key > webapp2-server.crt",
     "build:image": "docker build -t webapp2-nginx .",
     "build:sw": "browserify -t babelify sw/index.js -o app/sw.js",
+    "build:deps": "rollem",
     "remove:image": "docker rmi webapp2-nginx",
     "start:dev": "docker run --name app -d -p 8080:80 -p 8443:443 -v $(pwd)/app:/usr/share/nginx/html/app:ro webapp2-nginx",
     "start": "docker run --name app -d -p 80:80 -p 443:443 -v $(pwd)/app:/usr/share/nginx/html/app:ro webapp2-nginx",
     "stop": "docker stop app; docker rm app",
-    "bundle": "rollup -c",
-    "watch": "rollup -w -c &",
-    "unwatch": "killall -- node $(pwd)/node_modules/.bin/rollup -w -c; exit 0",
-    "eslint": "eslint app/lib --",
-    "zip": "zip -r WebApp2.zip . -x 'node_modules/*' '.git/*'"
+    "eslint": "eslint app/js"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
-    "babel-plugin-module-resolver": "^2.7.1",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-plugin-syntax-object-rest-spread": "^6.23.0",
     "babel-preset-flow": "^6.23.0",
     "babelify": "^7.3.0",
     "browserify": "^14.4.0",
     "eslint": "^3.19.0",
     "eslint-config-mizchi": "^1.1.0",
     "lodash-es": "^4.17.4",
-    "redux": "^3.6.0",
-    "rollup": "^0.41.6",
-    "rollup-plugin-buble": "^0.15.0",
+    "rollem": "^1.12.0",
+    "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-commonjs": "^8.0.2",
-    "rollup-plugin-license": "^0.4.0",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-watch": "^3.2.2",
     "watchify": "^3.9.0"
+  },
+  "dependencies": {
+    "redux": "^3.6.0",
+    "xtend": "^4.0.1"
   }
 }

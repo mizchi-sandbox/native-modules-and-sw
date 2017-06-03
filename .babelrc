@@ -1,5 +1,8 @@
 {
+  "presets": [
+    "flow"
+  ],
   "plugins": [
-    "transform-object-rest-spread"
+    "syntax-object-rest-spread"
   ]
 }

@@ -1,26 +1,33 @@
-# ES Modules playground with http/2
+# ES Modules playground
 
-Exprentments about service-worker and native es-modules.
+Next Generation Module Exprentments
+
+- Native ES Modules
+- ServiceWorker
+- Babel transform in ServiceWorker
+- WIP: HTTP/2 Casper
 
 This repository is based on uupaa/WebApp2.
 
-## What I do
+## What I want to do
 
-- Compile js by babel in service-worker (flow)
-- Rewrite all import path by sw/babel-plugin-rewrite-import-path
-- import `redux` and it works.
-
-`app/js/entry.js` works.
+It works. (`app/js/main.js`)
 
 ```js
 /* @flow */
-import { combineReducers } from 'redux'
-import mymod from './mymod'
+import { combineReducers } from 'redux' // import external
+import sub from './sub' // import internal
 
-function double(val: number): number {
+sub()
+console.log('run entry.js')
+
+// can parse flow vi babel
+function twice(val: number): number {
   return val * 2
 }
+console.log(twice(3))
 
+// can call external modules
 const reducer = combineReducers({ home: () => ({}) })
 console.log('redux', reducer())
 ```
@@ -30,11 +37,11 @@ console.log('redux', reducer())
 ```sh
 # frontend
 $ yarn install
-$ yarn install:app:deps
+$ yarn build:deps
 $ yarn build:sw
 
 # server
-$ yarn create:server:certificate
+$ yarn create:certificate
 $ yarn build:image
 $ yarn start:dev
 
@@ -42,6 +49,25 @@ $ yarn start:dev
 $ open http://localhost:8080 # http
 $ open https://localhost:8443 # https: WIP: it does not work without sw certificate
 ```
+
+## How to add modules
+
+Install to `app/node_modules`
+
+```shell
+cd app
+yarn add redux
+```
+
+Add alias as `jsnext:main` to `conf/module-alias.json` manually
+
+```json
+{
+  "redux": "node_modules/redux/es/index.js"
+}
+```
+
+After you edit `module-alias.json`, you need to run `yarn build:sw`.
 
 ---
 

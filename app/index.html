@@ -18,7 +18,7 @@ window.process = { env: 'development' }
     newWorker.addEventListener('statechange', () => {
       console.info('registration: newWorker statechange')
       if (!hasInitialSW) {
-        // TODO: Replace later to import('./js/entry')
+        // TODO: Replace later to import('./js/main')
         location.reload()
       }
     })

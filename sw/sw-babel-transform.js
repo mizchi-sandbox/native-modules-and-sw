@@ -6,17 +6,11 @@ const rewriteModulePath = require('./babel-plugin-rewrite-import-path')
 const babelConfigWithPath = filename => ({
   presets: [require('babel-preset-flow')],
   plugins: [
-    require('babel-plugin-transform-object-rest-spread'),
+    require('babel-plugin-syntax-object-rest-spread'),
     [
       rewriteModulePath,
       {
         base: '/app',
-        alias: {
-          'lodash-es/isPlainObject':
-            './node_modules/lodash-es/isPlainObject.js',
-          'symbol-observable': './node_modules/symbol-observable/es/index.js',
-          redux: './node_modules/redux/es/index.js'
-        },
         filename
       }
     ]
@@ -37,7 +31,7 @@ const fetchTransformedJS = url => {
 
 self.addEventListener('fetch', ev => {
   const url = ev.request.url
-  if (url.indexOf('/app/js/') > -1 || url.indexOf('/app/node_modules') > -1) {
+  if (url.indexOf('/app/js/') > -1 || url.indexOf('/app/modules') > -1) {
     console.info('sw: handle fetch', url)
     return ev.respondWith(fetchTransformedJS(url))
   }
