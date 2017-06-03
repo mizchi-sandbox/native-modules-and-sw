@@ -17,15 +17,9 @@ This repository is based on uupaa/WebApp2.
 import { combineReducers } from 'redux'
 import mymod from './mymod'
 
-mymod()
-
 function double(val: number): number {
   return val * 2
 }
-console.log('entry main', double(3))
-const a = { a: 1 }
-const b = { ...a, b: 2 }
-console.log(b)
 
 const reducer = combineReducers({ home: () => ({}) })
 console.log('redux', reducer())
@@ -34,12 +28,19 @@ console.log('redux', reducer())
 ## Build
 
 ```sh
+# frontend
+$ yarn install
+$ yarn install:app:deps
+$ yarn build:sw
+
+# server
 $ yarn create:server:certificate
 $ yarn build:image
-$ sh install-modules.sh
 $ yarn start:dev
-$ open localhost:8080 # http
-$ open localhost:8443 # https
+
+# open
+$ open http://localhost:8080 # http
+$ open https://localhost:8443 # https: WIP: it does not work without sw certificate
 ```
 
 ---

@@ -1,5 +1,6 @@
-const babel = require('babel-core')
+/* @flow */
 const { parse } = require('url')
+const babel = require('babel-core')
 const rewriteModulePath = require('./babel-plugin-rewrite-import-path')
 
 const babelConfigWithPath = filename => ({
@@ -11,10 +12,10 @@ const babelConfigWithPath = filename => ({
       {
         base: '/app',
         alias: {
-          myextmod: './js/modules/myextmod.js',
-          'lodash-es/isPlainObject': './js/helper/isPlainObjectMock.js',
-          'symbol-observable': './js/modules/symbol-observable/index.js',
-          redux: './js/modules/redux/index.js'
+          'lodash-es/isPlainObject':
+            './node_modules/lodash-es/isPlainObject.js',
+          'symbol-observable': './node_modules/symbol-observable/es/index.js',
+          redux: './node_modules/redux/es/index.js'
         },
         filename
       }
@@ -36,7 +37,7 @@ const fetchTransformedJS = url => {
 
 self.addEventListener('fetch', ev => {
   const url = ev.request.url
-  if (url.indexOf('/app/js/') > -1) {
+  if (url.indexOf('/app/js/') > -1 || url.indexOf('/app/node_modules') > -1) {
     console.info('sw: handle fetch', url)
     return ev.respondWith(fetchTransformedJS(url))
   }

@@ -1,15 +1,37 @@
 <!DOCTYPE html>
 <head>
   <title>App</title>
+<script type='module'>
+window.process = { env: 'development' }
+
+// SW
+;(async () => {
+  const hasInitialSW = !!navigator.serviceWorker.controller
+  const reg = await navigator.serviceWorker.register('/app/sw.js', {
+    scope: '/app/'
+  })
+
+  reg.addEventListener('updatefound', () => {
+    console.info('registration: updatefound')
+    const newWorker = reg.installing
+    console.info('newWorker.state', newWorker.state)
+    newWorker.addEventListener('statechange', () => {
+      console.info('registration: newWorker statechange')
+      if (!hasInitialSW) {
+        // TODO: Replace later to import('./js/entry')
+        location.reload()
+      }
+    })
+  })
+})()
+navigator.serviceWorker.addEventListener('controllerchange', () => {
+  console.log('navigator controllerchange')
+})
+</script>
 </head>
 <body>
   <h1>It Works!</h1>
-  <script>
-window.process = { env: 'development' }
-</script>
-
-  <script type="module" src="./register-sw.js"></script>
-  <script type="module" src="./js/entry.js"></script>
+  <script type="module" src="./js/main.js"></script>
   <script defer nomodule src="./js/bundle.js"></script>
 </body>
 </html>

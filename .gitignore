@@ -1,5 +1,6 @@
 ## ignore the dependency modules directory
 node_modules
+app/node_modules
 
 ## ignore the file that is automatically regenerated
 conf/*.crt

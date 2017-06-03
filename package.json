@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "description": "ES Modules test env",
   "scripts": {
+    "install:app:deps": "cd app; yarn install",
     "create:server:certificate": "cd conf; openssl genrsa -out webapp2-server.key 2048 && openssl req -new -key webapp2-server.key -out webapp2-server.csr -subj \"/C=JP/ST=Tokyo/L=Tokyo/CN=localhost\" && openssl x509 -in webapp2-server.csr -days 3650 -req -signkey webapp2-server.key > webapp2-server.crt",
     "build:image": "docker build -t webapp2-nginx .",
+    "build:sw": "browserify -t babelify sw/index.js -o app/sw.js",
     "remove:image": "docker rmi webapp2-nginx",
     "start:dev": "docker run --name app -d -p 8080:80 -p 8443:443 -v $(pwd)/app:/usr/share/nginx/html/app:ro webapp2-nginx",
     "start": "docker run --name app -d -p 80:80 -p 443:443 -v $(pwd)/app:/usr/share/nginx/html/app:ro webapp2-nginx",

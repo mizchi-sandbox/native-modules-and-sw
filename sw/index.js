@@ -1,5 +1,5 @@
 /* @flow */
-require('./transform-babel')
+require('./sw-babel-transform')
 
 self.addEventListener('install', function(_ev) {
   console.log('sw: installed')
