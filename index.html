@@ -7,8 +7,8 @@ window.process = { env: 'development' }
 // SW
 ;(async () => {
   const hasInitialSW = !!navigator.serviceWorker.controller
-  const reg = await navigator.serviceWorker.register('/app/sw.js', {
-    scope: '/app/'
+  const reg = await navigator.serviceWorker.register('./sw.js', {
+    scope: '/native-modules-and-sw/'
   })
 
   reg.addEventListener('updatefound', () => {
