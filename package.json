@@ -25,6 +25,7 @@
     "browserify": "^14.4.0",
     "eslint": "^3.19.0",
     "eslint-config-mizchi": "^1.1.0",
+    "lodash-es": "^4.17.4",
     "redux": "^3.6.0",
     "rollup": "^0.41.6",
     "rollup-plugin-buble": "^0.15.0",

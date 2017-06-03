@@ -1,5 +1,47 @@
 # ES Modules playground with http/2
 
+Exprentments about service-worker and native es-modules.
+
+This repository is based on uupaa/WebApp2.
+
+## What I do
+
+- Compile js by babel in service-worker (flow)
+- Rewrite all import path by sw/babel-plugin-rewrite-import-path
+- import `redux` and it works.
+
+`app/js/entry.js` works.
+
+```js
+/* @flow */
+import { combineReducers } from 'redux'
+import mymod from './mymod'
+
+mymod()
+
+function double(val: number): number {
+  return val * 2
+}
+console.log('entry main', double(3))
+const a = { a: 1 }
+const b = { ...a, b: 2 }
+console.log(b)
+
+const reducer = combineReducers({ home: () => ({}) })
+console.log('redux', reducer())
+```
+
+## Build
+
+```sh
+$ yarn create:server:certificate
+$ yarn build:image
+$ sh install-modules.sh
+$ yarn start:dev
+$ open localhost:8080 # http
+$ open localhost:8443 # https
+```
+
 ---
 
 # WebApp/2

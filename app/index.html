@@ -4,8 +4,12 @@
 </head>
 <body>
   <h1>It Works!</h1>
+  <script>
+window.process = { env: 'development' }
+</script>
+
   <script type="module" src="./register-sw.js"></script>
-  <script type="module" src="./lib/entry.js"></script>
-  <script defer nomodule src="./bundle.js"></script>
+  <script type="module" src="./js/entry.js"></script>
+  <script defer nomodule src="./js/bundle.js"></script>
 </body>
 </html>

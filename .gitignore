@@ -18,5 +18,5 @@ gh-pages
 # generated
 
 app/bundle.js
-app/lib
 app/sw.js
+app/js/modules

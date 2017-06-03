@@ -1,7 +1,4 @@
-// const swReady = new Promise(resolve => {
-//   navigator.serviceworker.addEventListener('controllerchange', resolve)
-// })
-
+/* eslint-disable */
 navigator.serviceWorker
   .register('/app/sw.js', { scope: '/app/' })
   .then(registration => {
