@@ -15,3 +15,7 @@ npm-debug.log
 ## ignore gh-pages dir
 gh-pages
 
+# generated
+
+app/bundle.js
+app/lib

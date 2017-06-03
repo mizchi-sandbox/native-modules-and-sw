@@ -1,11 +1,12 @@
 {
   "name": "webapp2-example-app",
   "version": "0.0.0",
-  "description": "",
+  "description": "ES Modules test env",
   "scripts": {
     "create:server:certificate": "cd conf; openssl genrsa -out webapp2-server.key 2048 && openssl req -new -key webapp2-server.key -out webapp2-server.csr -subj \"/C=JP/ST=Tokyo/L=Tokyo/CN=localhost\" && openssl x509 -in webapp2-server.csr -days 3650 -req -signkey webapp2-server.key > webapp2-server.crt",
     "build:image": "docker build -t webapp2-nginx .",
     "remove:image": "docker rmi webapp2-nginx",
+    "start:dev": "docker run --name app -d -p 8080:80 -p 8443:443 -v $(pwd)/app:/usr/share/nginx/html/app:ro webapp2-nginx",
     "start": "docker run --name app -d -p 80:80 -p 443:443 -v $(pwd)/app:/usr/share/nginx/html/app:ro webapp2-nginx",
     "stop": "docker stop app; docker rm app",
     "bundle": "rollup -c",
