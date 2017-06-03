@@ -16,13 +16,22 @@
     "zip": "zip -r WebApp2.zip . -x 'node_modules/*' '.git/*'"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-plugin-module-resolver": "^2.7.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-flow": "^6.23.0",
+    "babelify": "^7.3.0",
+    "browserify": "^14.4.0",
     "eslint": "^3.19.0",
+    "eslint-config-mizchi": "^1.1.0",
+    "redux": "^3.6.0",
     "rollup": "^0.41.6",
-    "rollup-watch": "^3.2.2",
     "rollup-plugin-buble": "^0.15.0",
     "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-license": "^0.4.0",
-    "rollup-plugin-node-resolve": "^3.0.0"
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-watch": "^3.2.2",
+    "watchify": "^3.9.0"
   }
 }
-

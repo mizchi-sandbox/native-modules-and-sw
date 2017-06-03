@@ -19,3 +19,4 @@ gh-pages
 
 app/bundle.js
 app/lib
+app/sw.js
